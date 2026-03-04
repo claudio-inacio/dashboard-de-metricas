@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 
 interface DashboardHeaderProps {
   requestLoading: boolean;
-  handleAtualizedata: () => void;
 }
 
 export default function DashboardHeader({ requestLoading }: DashboardHeaderProps) {

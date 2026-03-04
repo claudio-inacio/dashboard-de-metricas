@@ -1,39 +1,42 @@
 "use client";
 
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import useDashboardData from "../hooks/useDashboardData";
 import DashboardHeader from "./components/DashboardHeader";
 import DashboardContainer from "./components/DashboardContainer";
-import dynamic from 'next/dynamic'
-const ModalErrorInfo = dynamic(() => import('../components/error/ModalErrorInfo'), { ssr: false })
 
 
 export default function Dashboard() {
   const { resultSet, handleGetDashboardData, requestLoading, error, handleClearErrorsCloseModal } = useDashboardData();
 
+  const ModalErrorInfo = lazy(() => import("../components/error/ModalErrorInfo"));
+
+
   useEffect(() => {
     if (!resultSet) {
-      handleGetDashboardData();
+      handleGetDashboardData({ isAtualize: false });
     }
   }, []);
 
   return (
     <main className="min-w-[320px]">
-      <DashboardHeader handleAtualizedata={handleGetDashboardData} requestLoading={!!requestLoading} />
+      <DashboardHeader requestLoading={!!requestLoading} />
       <DashboardContainer resultSet={resultSet} loading={!!requestLoading} handleGetDashboardData={handleGetDashboardData} />
+      <Suspense fallback={null}>
 
-      {error && (
-        <ModalErrorInfo
-          open={true}
-          title="Falha na requisição"
-          message={
-            typeof error === "string"
-              ? error
-              : "Ocorreu um erro desconhecido. Tente novamente mais tarde."
-          }
-          onClose={handleClearErrorsCloseModal}
-        />
-      )}
+        {error && (
+          <ModalErrorInfo
+            open={true}
+            title="Falha na requisição"
+            message={
+              typeof error === "string"
+                ? error
+                : "Ocorreu um erro desconhecido. Tente novamente mais tarde."
+            }
+            onClose={handleClearErrorsCloseModal}
+          />
+        )}
+      </Suspense>
     </main>
   )
 }

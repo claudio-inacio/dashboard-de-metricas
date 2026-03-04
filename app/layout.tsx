@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import HeaderComponent from "./components/header/HeaderComponent";
 import logoImage from "./assets/img/new-icon.png";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +34,7 @@ export default function RootLayout({
       >
         <HeaderComponent headertitle="DASHBOARD DE MÉTRICAS" imageIcon={logoImage} />
         {children}
+        <ToastContainer />
       </body>
     </html>
   );

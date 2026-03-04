@@ -2,9 +2,11 @@
 import { useState } from "react";
 import { DashboardData } from "../types/dashboardData";
 import LocalStorageUtils from "../utils/LocalStorageUtils"
+import { ToastContainer, toast } from 'react-toastify';
 
-
-
+interface GetDashboardDataProps {
+ isAtualize: boolean;
+}
 
 
 const useDashboardData = () => {
@@ -18,7 +20,7 @@ const useDashboardData = () => {
         setError(false)
     }
 
-    const handleGetDashboardData = async () => {
+    const handleGetDashboardData = async ({ isAtualize = false }: GetDashboardDataProps) => {
         setRequestLoading(true);
         try {
 
@@ -29,6 +31,7 @@ const useDashboardData = () => {
             }
             const json: DashboardData = await response.json();
             LocalStorageUtils.setItem("dashboardData", json);
+            toast.success(isAtualize? "Dados do dashboard atualizados com sucesso!" : 'Dados do dashboard carregados com sucesso!');
             setResultSet(json);
         }
         catch (error) {
