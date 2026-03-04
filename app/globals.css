@@ -17,8 +17,6 @@
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-success: var(--success);
-  --color-error: var(--error);
-
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,6 +27,6 @@
 }
 
 body {
-  color: var(--foreground);
+  color: #0a0a0a;
   font-family: Arial, Helvetica, sans-serif;
 }
