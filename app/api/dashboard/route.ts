@@ -11,14 +11,6 @@ export async function GET() {
     },
     campaigns: [
       {
-        id: 1,
-        name: "Black Friday 2026",
-        channel: "Google Ads",
-        status: "ativa",
-        chanelId: 1,
-        investment: 15000
-      },
-      {
         id: 2,
         name: "Campanha Instagram Verão",
         channel: "Instagram Ads",
@@ -34,14 +26,7 @@ export async function GET() {
         chanelId: 3,
         investment: 5000
       },
-      {
-        id: 4,
-        name: "Captação B2B LinkedIn",
-        channel: "LinkedIn Ads",
-        status: "ativa",
-        chanelId: 4,
-        investment: 12000
-      },
+
       {
         id: 5,
         name: "YouTube Awareness",
@@ -106,14 +91,7 @@ export async function GET() {
         status: "pausada",
         investment: 14500
       },
-      {
-        id: 13,
-        name: "LinkedIn Lead Gen Executivo",
-        channel: "LinkedIn Ads",
-        chanelId: 4,
-        status: "ativa",
-        investment: 9800
-      },
+
       {
         id: 14,
         name: "Teste Público Frio",
@@ -122,14 +100,6 @@ export async function GET() {
         status: "pausada",
         investment: 2600
       },
-      {
-        id: 15,
-        name: "Retargeting Carrinho Abandonado",
-        channel: "Google Ads",
-         chanelId: 1,
-        status: "ativa",
-        investment: 5400
-      }
     ]
 
   }

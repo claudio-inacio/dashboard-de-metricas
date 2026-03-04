@@ -11,93 +11,102 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
+import DontResultSetDataComponent from "../error/DontResultSetDataComponent";
+import DataErrorRequestComponent from "../error/DataErrorRequestComponent";
 
 const colors = ["#1d4ed8", "#2563eb", "#3b82f6", "#60a5fa", "#93c5fd"];
 
 interface CampaignInvestmentChartProps {
   campaigns?: CampaignData[];
+  error: boolean;
 }
 
 function GraphicInvestimentComponent({
   campaigns = [],
+  error
 }: CampaignInvestmentChartProps) {
   const { groupCampaignsByChannel } = useGraphiPreareData();
   const data = groupCampaignsByChannel(campaigns);
 
-  if (data.length === 0) {
+console.log({data})
+  if (error) {
     return (
-      <div className="w-full h-[300px] md:h-[500px] p-6 md:p-20 bg-white rounded-2xl shadow flex flex-col items-center justify-center text-gray-500">
-        <p className="text-lg font-semibold">Nenhum dado disponível</p>
-        <p className="text-sm text-gray-400 mt-1 text-center">
-          Não há campanhas para exibir.
-        </p>
+
+      <div className="my-20">
+        <DataErrorRequestComponent errorMessage="Erro Interno! Não foi possível carregar o gráfico" />;
+
       </div>
-    );
+    )
+
   }
 
   return (
     <div className="w-full h-[350px] md:h-[500px] p-4 md:p-4 lg:p-12 bg-white rounded-2xl shadow">
-        <h3 className="mb-10">INESTIMENTO EM CAMPANHAS POR CANAL</h3>
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          data={data}
-          layout="vertical"
-          margin={{
-            top: 10,
-            right: 20,
-            left: 10,
-            bottom: 10,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-
-          <XAxis
-            type="number"
-            tick={{ fontSize: 11 }}
-            tickFormatter={(value) =>
-              value.toLocaleString("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-                maximumFractionDigits: 0,
-              })
-            }
-          />
-
-          <YAxis
-            dataKey="channel"
-            type="category"
-            width={90}
-            tick={{ fontSize: 12, fontWeight: 600 }}
-          />
-
-          <Tooltip
-            cursor={{ fill: "transparent" }}
-            contentStyle={{
-              backgroundColor: "white",
-              border: "1px solid #e5e7eb",
-              borderRadius: "8px",
+      <h3 className="mb-10">INVESTIMENTO EM CAMPANHAS POR CANAL</h3>
+      {data.length === 0 ? (
+        <DontResultSetDataComponent title="Nenhum dado disponível" messageInfo="Não há dados de campanhas para exibir" />
+      ) : (
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={data}
+            layout="vertical"
+            margin={{
+              top: 0,
+              right: 0,
+              left: 0,
+              bottom: 70,
             }}
-            itemStyle={{ color: "#1d4ed8", fontWeight: 600 }}
-            formatter={(_, __, item) => [
-              item.payload.total_investment_fmt,
-              "Investimento",
-            ]}
-          />
-
-          <Bar
-            dataKey="total_investment_num"
-            barSize={20}
-            radius={[0, 6, 6, 0]}
           >
-            {data.map((channel, index) => (
-              <Cell
-                key={`cell-${channel.chanelId}`}
-                fill={colors[index % colors.length]}
-              />
-            ))}
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
+            <CartesianGrid strokeDasharray="3 3" />
+
+            <XAxis
+              type="number"
+              tick={{ fontSize: 11 }}
+              tickFormatter={(value) =>
+                value.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                  maximumFractionDigits: 0,
+                })
+              }
+            />
+
+            <YAxis
+              dataKey="channel"
+              type="category"
+              width={90}
+              tick={{ fontSize: 12, fontWeight: 600 }}
+            />
+
+            <Tooltip
+              cursor={{ fill: "transparent" }}
+              contentStyle={{
+                backgroundColor: "white",
+                border: "1px solid #e5e7eb",
+                borderRadius: "8px",
+              }}
+              itemStyle={{ color: "#1d4ed8", fontWeight: 600 }}
+              formatter={(_, __, item) => [
+                item.payload.total_investment_fmt,
+                "Investimento",
+              ]}
+            />
+
+            <Bar
+              dataKey="total_investment_num"
+              barSize={20}
+              radius={[0, 6, 6, 0]}
+            >
+              {data.map((channel, index) => (
+                <Cell
+                  key={`cell-${channel.chanelId}`}
+                  fill={colors[index % colors.length]}
+                />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      )}
     </div>
   );
 }

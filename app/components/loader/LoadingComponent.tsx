@@ -1,4 +1,12 @@
-const LoadingComponent = () => {
+
+
+interface LoadingProps {
+    title: string;
+    messageLoading: string;
+}
+
+
+const LoadingComponent = ({ title, messageLoading }: LoadingProps) => {
     return (
         <div className="w-full h-full flex flex-col items-center justify-center gap-6 py-20">
             <div className="relative flex items-center justify-center">
@@ -9,11 +17,11 @@ const LoadingComponent = () => {
             </div>
             <div className="flex flex-col items-center">
                 <span className="text-gray-700 font-semibold text-lg">
-                    Carregando dados
+                    {title }
                 </span>
 
                 <span className="text-gray-400 text-sm">
-                    Aguarde enquanto buscamos as métricas
+                     {messageLoading}
                 </span>
             </div>
 
