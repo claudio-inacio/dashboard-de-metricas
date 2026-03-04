@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import ApresentationComponent from "./ApresentationComponent";
 import SelectAnalyticComponent from "./SelectAnalyticComponent";
 
@@ -6,6 +7,7 @@ interface HomeContentProps {
     description: string;
 }
 const HomeContent = ({ title, description }: HomeContentProps) => {
+
     return (
         <main className="flex flex-col">
             <ApresentationComponent title={title} description={description} />
