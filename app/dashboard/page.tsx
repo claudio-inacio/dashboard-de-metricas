@@ -2,8 +2,8 @@
 
 import { lazy, Suspense, useEffect } from "react";
 import useDashboardData from "../hooks/useDashboardData";
-import DashboardHeader from "./components/DashboardHeader";
 import DashboardContainer from "./components/DashboardContainer";
+import PageHeaderActions from "../components/header/PageHeaderActions";
 
 
 export default function Dashboard() {
@@ -20,7 +20,10 @@ export default function Dashboard() {
 
   return (
     <main className="min-w-[320px]">
-      <DashboardHeader requestLoading={!!requestLoading} />
+      <PageHeaderActions
+        requestLoading={!!requestLoading}
+        title="Visão Analítica das Campanhas"
+      />
       <DashboardContainer resultSet={resultSet} loading={!!requestLoading} handleGetDashboardData={handleGetDashboardData} />
       <Suspense fallback={null}>
 
