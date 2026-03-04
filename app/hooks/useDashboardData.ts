@@ -7,7 +7,7 @@ import { DashboardData } from "../types/dashboardData";
 
 
 const useDashboardData = () => {
-    const [resultSet, setResultSet] = useState<DashboardData | []>([]);
+    const [resultSet, setResultSet] = useState<DashboardData | null>(null);
     const [requestLoading, setRequestLoading] = useState<boolean>(false)
     const [error, setError] = useState<string | null>(null);
 

@@ -12,9 +12,18 @@ export interface CampaignData {
     channel: string;
     status: CampaignStatus;
     investment: number;
+    chanelId: number,
 }
 
 export interface DashboardData {
     metrics: Metric;
     campaigns: CampaignData[];
 }
+
+export type ChannelInvestment = {
+  chanelId: number;
+  channel: string;
+  total_investment: number;
+  total_investment_num: number;
+  total_investment_fmt: string;
+};

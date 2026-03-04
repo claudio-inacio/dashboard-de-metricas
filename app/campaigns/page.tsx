@@ -2,9 +2,9 @@
 
 
 export default function Home() {
-
-
   return (
-    <h1>camnpanhas</h1>
+  <main>
+    <h1>campanha</h1>
+  </main>
   );
 }

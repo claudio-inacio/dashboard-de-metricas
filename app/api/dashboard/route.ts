@@ -15,6 +15,7 @@ export async function GET() {
         name: "Black Friday 2026",
         channel: "Google Ads",
         status: "ativa",
+        chanelId: 1,
         investment: 15000
       },
       {
@@ -22,6 +23,7 @@ export async function GET() {
         name: "Campanha Instagram Verão",
         channel: "Instagram Ads",
         status: "ativa",
+        chanelId: 2,
         investment: 8200
       },
       {
@@ -29,6 +31,7 @@ export async function GET() {
         name: "Remarketing Site",
         channel: "Meta Ads",
         status: "pausada",
+        chanelId: 3,
         investment: 5000
       },
       {
@@ -36,6 +39,7 @@ export async function GET() {
         name: "Captação B2B LinkedIn",
         channel: "LinkedIn Ads",
         status: "ativa",
+        chanelId: 4,
         investment: 12000
       },
       {
@@ -43,12 +47,14 @@ export async function GET() {
         name: "YouTube Awareness",
         channel: "YouTube Ads",
         status: "pausada",
+        chanelId: 5,
         investment: 9300
       },
       {
         id: 6,
         name: "Google Search Produto X",
         channel: "Google Ads",
+         chanelId: 1,
         status: "ativa",
         investment: 6800
       },
@@ -57,6 +63,7 @@ export async function GET() {
         name: "Campanha Email Reengajamento",
         channel: "Email Marketing",
         status: "ativa",
+         chanelId: 6,
         investment: 1200
       },
       {
@@ -64,12 +71,14 @@ export async function GET() {
         name: "TikTok Teste Público Jovem",
         channel: "TikTok Ads",
         status: "pausada",
+         chanelId: 7,
         investment: 4300
       },
       {
         id: 9,
         name: "Facebook Leads Q1",
         channel: "Facebook Ads",
+        chanelId: 9,
         status: "ativa",
         investment: 7100
       },
@@ -77,6 +86,7 @@ export async function GET() {
         id: 10,
         name: "Influenciadores Tech",
         channel: "Parcerias",
+        chanelId: 8,
         status: "ativa",
         investment: 11000
       },
@@ -84,6 +94,7 @@ export async function GET() {
         id: 11,
         name: "Google Display Remarketing",
         channel: "Google Ads",
+         chanelId: 1,
         status: "ativa",
         investment: 3900
       },
@@ -91,6 +102,7 @@ export async function GET() {
         id: 12,
         name: "Campanha Lançamento App",
         channel: "Instagram Ads",
+         chanelId: 2,
         status: "pausada",
         investment: 14500
       },
@@ -98,6 +110,7 @@ export async function GET() {
         id: 13,
         name: "LinkedIn Lead Gen Executivo",
         channel: "LinkedIn Ads",
+        chanelId: 4,
         status: "ativa",
         investment: 9800
       },
@@ -105,6 +118,7 @@ export async function GET() {
         id: 14,
         name: "Teste Público Frio",
         channel: "Meta Ads",
+         chanelId: 3,
         status: "pausada",
         investment: 2600
       },
@@ -112,6 +126,7 @@ export async function GET() {
         id: 15,
         name: "Retargeting Carrinho Abandonado",
         channel: "Google Ads",
+         chanelId: 1,
         status: "ativa",
         investment: 5400
       }

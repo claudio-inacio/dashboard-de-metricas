@@ -1,20 +1,24 @@
 import { colorButtoEnum } from "@/app/enum";
-import Image, { StaticImageData } from "next/image";
-
 
 interface ButtonProps {
-
-    image?: string | StaticImageData;
     handleFunction: () => void;
     buttontitle: string;
-    color: 'success' | 'error' | 'warning' | 'info' | 'primary' ;
-    variant?: 'contained' | 'outlined';
+    styleClass?: string;
+    disabled: boolean;
+    color: 'success' | 'error' | 'warning' | 'info' | 'primary';
+
 }
-const Button = ({ buttontitle, color, variant, handleFunction }: ButtonProps) => {
+const Button = ({ buttontitle, color, handleFunction, styleClass, disabled }: ButtonProps) => {
     return (
 
         <button
-            className={`mt-6 ${colorButtoEnum[color]} text-white font-bold py-2 px-4 rounded cursor-pointer`}
+            disabled={disabled}
+            className={`
+    ${colorButtoEnum[color]}
+    text-white font-bold py-2 px-4 rounded
+    ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+    ${styleClass ?? ''}
+  `}
             onClick={handleFunction}
         >
             {buttontitle}
