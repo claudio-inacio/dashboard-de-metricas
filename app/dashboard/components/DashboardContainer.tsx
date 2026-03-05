@@ -15,7 +15,7 @@ interface DashboardContainerProps {
 export default function DashboardContainer({ handleGetDashboardData, resultSet, loading }: DashboardContainerProps) {
 
   return (
-    <section className="md:px-10 px-4">
+    <section className="md:px-6 px-4">
       <div className="w-full p-4 cursor-default bg-gray-100 space-y-2 rounded-2xl shadow ">
         <div className="flex justify-end">
           <Button disabled={loading} buttontitle="Atualizar" handleFunction={() => handleGetDashboardData({ isAtualize: true })} color="warning" />

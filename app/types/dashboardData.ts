@@ -1,4 +1,4 @@
-export type CampaignStatus = "ativa" | "pausada";
+export type CampaignStatus = "ativa" | "pausada" | "finalizada";
 
 export interface Metric {
     totalClients: number;
@@ -13,6 +13,12 @@ export interface CampaignData {
     status: CampaignStatus;
     investment: number;
     chanelId: number,
+    startDate: string,
+    endDate: string,
+}
+
+export interface ListCampaignData extends Omit<CampaignData, "endDate"> {
+    endDate: string | undefined;
 }
 
 export interface DashboardData {
@@ -21,9 +27,18 @@ export interface DashboardData {
 }
 
 export type ChannelInvestment = {
-  chanelId: number;
-  channel: string;
-  total_investment: number;
-  total_investment_num: number;
-  total_investment_fmt: string;
+    chanelId: number;
+    channel: string;
+    total_investment: number;
+    total_investment_num: number;
+    total_investment_fmt: string;
+};
+
+export type ColumnType = "text" | "currency" | "date" | "status" | "custom";
+
+export type TableColumn<T> = {
+    header: string;
+    field: keyof T;
+    type?: ColumnType;
+    render?: (item: T) => React.ReactNode;
 };

@@ -5,7 +5,8 @@ import LocalStorageUtils from "../utils/LocalStorageUtils"
 import { ToastContainer, toast } from 'react-toastify';
 
 interface GetDashboardDataProps {
- isAtualize: boolean;
+    isAtualize: boolean;
+    isDashboardPage?: boolean;
 }
 
 
@@ -15,12 +16,12 @@ const useDashboardData = () => {
     const [requestLoading, setRequestLoading] = useState<boolean>(!resultSetFromStorage ? true : false);
     const [error, setError] = useState<string | false>(false);
 
-    
+
     const handleClearErrorsCloseModal = () => {
         setError(false)
     }
 
-    const handleGetDashboardData = async ({ isAtualize = false }: GetDashboardDataProps) => {
+    const handleGetDashboardData = async ({ isAtualize = false, isDashboardPage = true }: GetDashboardDataProps) => {
         setRequestLoading(true);
         try {
 
@@ -31,7 +32,11 @@ const useDashboardData = () => {
             }
             const json: DashboardData = await response.json();
             LocalStorageUtils.setItem("dashboardData", json);
-            toast.success(isAtualize? "Dados do dashboard atualizados com sucesso!" : 'Dados do dashboard carregados com sucesso!');
+            if (isDashboardPage) {
+                toast.success(isAtualize ? "Dados do dashboard atualizados com sucesso!" : 'Dados do dashboard carregados com sucesso!');
+            } else {
+                toast.success(isAtualize ? "Lista de campanhas atualizada com sucesso!" : 'Lista de campanhas carregada com sucesso!');
+            }
             setResultSet(json);
         }
         catch (error) {
