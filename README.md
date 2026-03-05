@@ -1,31 +1,254 @@
-=== MELHORIAS FUTURAS ===
-1. O GRAFICO DE INVESTIMENTO TER UM BOTÃO COMO OPÇÃO PARA REDIRECIONAR PARA A LISTA DE CAMPANHAS TRAZENDO SOMENTE AS CAMPANHAS DO CANAL EM QUE ELE CLICOU
-2. LISTA DE CAMPANHA COM ORNDENAÇÃO POR VALOR DE INVESTIMENTO (CRESCENTE / DECRESCENTE), DATA DE CRIAÇÃO (CRESCENTE / DECRESCENTE)
-3. LISTA DE CAMPANHA COM FILTROS DE NOME, CANAL, DATA DE LANÇAMENTO/INICIO e VALOR MIN INVESTIMENTO X VALOR MAX INVESTIMENTO
-4. PERMITIR O CONTROLE AS CAMPANHAS ATRAVÉS DA LISTAGEM, TAIS COMO: "PAUSAR CAMPANHA" / "REATIVAR CAMPANHA" / "FINALIZAR CAMPANHA"
-5. PAGINAÇÃO NA LISTA DE CAMPANHAS, FARIAMOS UMA API PARA RETORNAR DE 10 ITENS POR REQUISIÇÃO OU CONFORME A SOLICITAÇÃO DO FRONT
-6. SEPARAR A LOGICA DO HOOK useDashboardData,DEFININDO UM HOOK PARA A TELA DE DASHBOARD E OUTRO PARA A TELA DE LISTAGEM DE CAMPANHAS
-7. DAR UMA OPÇÃO DE SALVAR FILTRO, SE O USUARIO QUISER ELE PODE SALVAR UM FILTRO PREFERENCIAL E TODA VEZ QUE ENTRAR NA TELA DE CAMPANHAS ELE JA VE O CONTEUDO SEGUINDO O FILTRO PREFERENCIAL DELE
+📊 Plataforma de Gestão de Campanhas de Marketing
 
+Aplicação web desenvolvida em Next.js + React + TypeScript + TailwindCSS para visualização e gerenciamento de campanhas de marketing digital.
 
+O sistema permite:
 
+Visualizar métricas em um dashboard analítico
 
-===TRATATIVA DE ERROS===
-1. PARA SIMULAR UM ERRO, BASTA ALTERAR A ROTA DA API NO HOOK: (handleGetDashboardData)
-2. CASO QUEIRA TESTAR A TRATATIVA DE EXIBIÇÃO DE REQUISIÇÃO SEM VALORES, BASTA PASSAR A INFORMAÇÃO DE CAMPAING DATA PARA OS COMPONENTES COMO UM ARRAY VAZIO []
-3. TRATATIVA DE NOTFOUND APLICADA, PARA TESTAR BASTA DIGITAR UMA ROTA INEXISTENTE EX: /rota-error
+Gerenciar e listar campanhas de marketing
 
-===FILTRO PELA URL===
-1. PARA INFORMAR UMA URL COM FILTRO APLICADO BASTAR INFORMAR (/campaigns?filter=ativa)
-2. OPÇÕES DE FILTROS DISPONIVEIS ativa | pausada | finalizada | todos
-3. CASO O USUARIO PASSE UM FILTRO QUE NÃO EXISTA, EXIBE UM MODAL DE ERRO EXPLICATIVO... PARA SIMULAR BASTA INFORMAR A URL COM O SEGUINTE FILTRO(/campaigns?filter=ativa-error)
+Filtrar campanhas por status
 
+Visualizar investimentos por canal
 
-=== ATENÇÃO ===
-0. VOU DEIXAR DESABILITADO A FUNCIONALIDADE DE SALVAR O RESULTADO NO LOCAL STORAGE, FICA MAIS FACIL PARA TESTAR.. CASO QUEIRA, BASTA DESCOMENTAR NO LOCAL INFORMADO ABAIXO.
-1. PARTINDO DO PRE-SUPOSTO QUE O USUARIO IRIA FICAR NAVEGANDO ENTRE AS APLICAÇÕES, A FIM EVITAR QUE TODAS AS VEZES QUE O USUARIO ENTRAR EM UMA DAS TELAS UMA NOVA REQUISIÇÃO SEJA FEITA, OS DADOS ESTÃO SENDO SALVOS NO LOCAL STORAGE, BASTA LIMPAR O LOCAL STORAGE E AO ENTRAR EM UMA DAS TELAS OU RECARREGAR A PAGINA, A BUSCA DAS INFORMAÇÕES ACONTECERA NORMALMENTE (MELHORIA FUTURA: UTILIZAR REACT QUERY PARA CACHEAR AS INFO DE REQUISIÇÕES.)
-2. CASO QUEIRA REMOVER O COMPORTAMENTO QUE SALVA OS DADOS NO LOCAL STORAGE, BASTA REMOVER OU COMENTAR ESSE COMANDO "LocalStorageUtils.setItem("dashboardData", json);" NO HOOK (useDashboardData)
-3. SE PREFERIR NÃO REMOVER O COMPORTAMENTO, O BOTÃO DE ATUALIZAR REALIZA A REQUISIÇÃO NOVAMENTE
+Navegar entre diferentes visões analíticas da aplicação
 
-=== LOADING ===
-1. PARA MELHOR VISUALIZAR O LOADING, SUGIRO QUE ALTERE O NETWORK PARA SIMULAÇÃO DA INTERNET PARA FAST 4G E CLIQUE EM ATUALIZAR, OU LIMPE O LOCAL STORAGE E RECARREGUE A PAGINA... FAZENDO ISSO TEREMOS UM PEQUENO DELAY NA REQUISIÇÃO, PERMITINDO MELHOR VISUALIZAR O LOADER
+O objetivo do projeto é demonstrar boas práticas de desenvolvimento front-end, incluindo:
+
+Componentização
+
+Tipagem forte com TypeScript
+
+Arquitetura modular
+
+Tratamento de erros
+
+Filtros via URL
+
+Componentes genéricos reutilizáveis
+
+🚀 Tecnologias Utilizadas
+
+Next.js (App Router)
+
+React
+
+TypeScript
+
+TailwindCSS
+
+Recharts (gráficos)
+
+React Toastify (notificações)
+
+LocalStorage (cache simples de dados)
+
+🌐 Ambiente de Produção
+
+A aplicação está disponível em:
+
+👉 [INSIRA AQUI O LINK DA APLICAÇÃO EM PRODUÇÃO]
+
+Exemplo:
+
+https://marketing-dashboard.vercel.app
+💻 Como Rodar o Projeto Localmente
+1️⃣ Clone o repositório
+git clone https://github.com/seu-usuario/seu-repositorio.git
+2️⃣ Acesse a pasta do projeto
+cd nome-do-projeto
+3️⃣ Instale as dependências
+npm install
+4️⃣ Execute o projeto
+npm run dev
+5️⃣ Acesse no navegador
+http://localhost:3000
+📊 Funcionalidades Implementadas
+Dashboard
+
+Visualização de métricas de campanhas
+
+Gráfico de investimento por canal
+
+Layout responsivo
+
+Listagem de Campanhas
+
+Tabela genérica e reutilizável
+
+Filtro por status:
+
+Ativa
+
+Pausada
+
+Finalizada
+
+Todas
+
+Filtros sincronizados com URL
+
+Componente de loading
+
+Tratamento de estados vazios
+
+Arquitetura
+
+O projeto foi estruturado com separação clara de responsabilidades:
+
+components
+hooks
+types
+enum
+containers
+pages
+
+Principais conceitos utilizados:
+
+Componentização
+
+Container Pattern
+
+Hooks customizados
+
+Tipagem genérica
+
+Componentes reutilizáveis
+
+🔎 Filtro via URL
+
+A listagem de campanhas permite aplicar filtros diretamente pela URL.
+
+Exemplo
+/campaigns?filter=ativa
+Opções disponíveis
+ativa
+pausada
+finalizada
+todos
+Caso o filtro não exista
+
+Se um filtro inválido for informado:
+
+/campaigns?filter=ativa-error
+
+Um modal de erro explicativo será exibido.
+
+⚠️ Tratativa de Erros
+Simular erro de requisição
+
+Basta alterar a rota da API no hook:
+
+handleGetDashboardData
+Testar estado vazio
+
+Passe um array vazio para campanhas:
+
+[]
+Testar página não encontrada
+
+Digite uma rota inexistente:
+
+/rota-error
+
+A aplicação exibirá a página 404 personalizada.
+
+⏳ Loading
+
+Para visualizar melhor o loading da aplicação:
+
+1️⃣ Abra o DevTools → Network
+2️⃣ Configure a velocidade para:
+
+Fast 4G
+
+3️⃣ Clique em Atualizar
+
+ou
+
+4️⃣ Limpe o LocalStorage e recarregue a página.
+
+💾 Cache de Dados
+
+Para evitar múltiplas requisições ao navegar entre páginas, os dados são armazenados temporariamente no LocalStorage.
+
+Isso simula um comportamento de cache.
+
+Melhoria futura:
+
+Utilizar React Query para cache de requisições.
+Desabilitar o armazenamento
+
+Caso queira desativar o cache no LocalStorage:
+
+Remova ou comente a linha:
+
+LocalStorageUtils.setItem("dashboardData", json);
+
+Localizada no hook:
+
+useDashboardData
+Atualizar dados manualmente
+
+Caso o cache esteja ativo, o botão Atualizar executa uma nova requisição.
+
+🔮 Melhorias Futuras
+
+1️⃣ Permitir clicar no gráfico de investimento e redirecionar para a lista de campanhas filtrada pelo canal selecionado.
+
+2️⃣ Ordenação da lista de campanhas por:
+
+Valor de investimento (crescente / decrescente)
+
+Data de criação (crescente / decrescente)
+
+3️⃣ Filtros avançados:
+
+Nome da campanha
+
+Canal
+
+Data de início
+
+Intervalo de investimento (mínimo / máximo)
+
+4️⃣ Controle direto das campanhas na listagem:
+
+Pausar campanha
+
+Reativar campanha
+
+Finalizar campanha
+
+5️⃣ Paginação da listagem de campanhas.
+
+Exemplo:
+
+API retornando 10 itens por requisição
+
+6️⃣ Separação do hook:
+
+useDashboardData
+
+em dois hooks:
+
+useDashboardData
+useCampaignListData
+
+7️⃣ Permitir salvar filtros preferenciais do usuário, exibindo automaticamente ao acessar a página de campanhas.
+
+📁 Estrutura Simplificada
+app
+ ├ components
+ ├ hooks
+ ├ enum
+ ├ types
+ ├ campaigns
+ ├ dashboard
+ └ utils
+👨‍💻 Autor
+
+Desenvolvido por Claudio Inácio
+
+Frontend Developer focado em React, Next.js e arquitetura de aplicações web escaláveis.
