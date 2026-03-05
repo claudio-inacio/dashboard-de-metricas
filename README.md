@@ -52,9 +52,12 @@ A aplicação está disponível em:
 Exemplo:
 
 https://marketing-dashboard.vercel.app
+
 💻 Como Rodar o Projeto Localmente
 1️⃣ Clone o repositório
+
 git clone https://github.com/claudio-inacio/dashboard-de-metricas.git
+
 2️⃣ Acesse a pasta do projeto
 cd dashboard-de-metricas
 3️⃣ Instale as dependências
@@ -62,6 +65,7 @@ npm install
 4️⃣ Execute o projeto
 npm run dev
 5️⃣ Acesse no navegador
+
 http://localhost:3000
 
 
