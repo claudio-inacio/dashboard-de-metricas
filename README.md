@@ -6,7 +6,7 @@ O sistema permite:
 
 Visualizar métricas em um dashboard analítico
 
-Gerenciar e listar campanhas de marketing
+Listar campanhas de marketing
 
 Filtrar campanhas por status
 
@@ -47,22 +47,24 @@ React Toastify (notificações)
 
 A aplicação está disponível em:
 
-👉 [INSIRA AQUI O LINK DA APLICAÇÃO EM PRODUÇÃO]
+👉 https://dashboard-de-metricas-w4cy.vercel.app/
 
 Exemplo:
 
 https://marketing-dashboard.vercel.app
 💻 Como Rodar o Projeto Localmente
 1️⃣ Clone o repositório
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/claudio-inacio/dashboard-de-metricas.git
 2️⃣ Acesse a pasta do projeto
-cd nome-do-projeto
+cd dashboard-de-metricas
 3️⃣ Instale as dependências
 npm install
 4️⃣ Execute o projeto
 npm run dev
 5️⃣ Acesse no navegador
 http://localhost:3000
+
+
 📊 Funcionalidades Implementadas
 Dashboard
 
