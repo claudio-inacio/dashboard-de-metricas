@@ -12,12 +12,13 @@ import InvalidUrlAlertComponent from "@/app/components/error/InvalidUrlAlertComp
 interface CampaignListContainerProps {
   campaigns: CampaignData[];
   loading: boolean;
-  filterParam: FilterType,
+  filterParam: FilterType | null,
   handleGetDashboardData: (props: { isAtualize: boolean, isDashboardPage: boolean, filterSelected?: FilterType, callBackFunction?: () => void }) => void;
 }
 
 export default function CampaignListContainer({ campaigns, loading, handleGetDashboardData, filterParam }: CampaignListContainerProps) {
-  const urlExist = statusEnumArray.includes(filterParam)
+  const urlFilter = filterParam || 'todos'
+  const urlExist = statusEnumArray.includes(urlFilter)
   const invalidUrlParams = !urlExist && !!filterParam;
   const [openModalErrorUrl, setModalErrorUrl] = useState(invalidUrlParams)
   const [currentFilter, setCurrentFilter] = useState<FilterType>(filterParam || "todos")
@@ -27,6 +28,7 @@ export default function CampaignListContainer({ campaigns, loading, handleGetDas
     setCurrentFilter(newfilter)
   }
   const filteredCampaigns = useMemo(() => {
+
     if (currentFilter === statusEnum.TODOS) return campaigns;
     return campaigns.filter((c) => c.status === currentFilter);
   }, [campaigns, currentFilter]);

@@ -12,7 +12,7 @@ export default function Campaigns() {
   const { resultSet, handleGetDashboardData, requestLoading, error, handleClearErrorsCloseModal } = useDashboardData();
   const searchParams = useSearchParams();
   const ModalErrorInfo = lazy(() => import("../components/error/ModalErrorInfo"));
-  const filterParam = searchParams.get("filter")?.toLocaleLowerCase() as FilterType | 'todos';
+  const filterParam = searchParams.get("filter") as FilterType | null;
   const hasFetched = useRef(false);
 
 
@@ -30,10 +30,13 @@ export default function Campaigns() {
         requestLoading={false}
         title="Lista de Campanhas"
       />
-      <CampaignListContainer
-        filterParam={filterParam}
-        loading={requestLoading} handleGetDashboardData={handleGetDashboardData} campaigns={resultSet?.campaigns || []}
-      />
+      <Suspense fallback={null}>
+
+        <CampaignListContainer
+          filterParam={filterParam}
+          loading={requestLoading} handleGetDashboardData={handleGetDashboardData} campaigns={resultSet?.campaigns || []}
+        />
+      </Suspense>
       <Suspense fallback={null}>
         {error && (
           <ModalErrorInfo
