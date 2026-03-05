@@ -22,7 +22,7 @@ const AnalyticTypeCard = ({ title, description, image, handleFunction, buttontit
             <div className="w-3/4 my-1 h-px bg-gray-300" />
             {image && <Image src={image} alt="imagem que representa o tipo de análise" className="w-56 h-36 md:w-80 md:h-52" />}
             <span className="px-2">{description}</span>
-            <Button buttontitle={buttontitle} styleClass="mt-6" color={buttonColor} handleFunction={handleFunction} />
+            <Button disabled={false} buttontitle={buttontitle} styleClass="mt-6" color={buttonColor} handleFunction={handleFunction} />
         </div>
     )
 }
