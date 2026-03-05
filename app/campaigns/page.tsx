@@ -1,23 +1,28 @@
 'use client';
 
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useRef } from "react";
 import PageHeaderActions from "../components/header/PageHeaderActions";
 import useDashboardData from "../hooks/useDashboardData";
 import CampaignListContainer from "./components/CampaignListContainer";
+import { useSearchParams } from "next/navigation";
+import { FilterType } from "../types/dashboardData";
 
 
 export default function Campaigns() {
   const { resultSet, handleGetDashboardData, requestLoading, error, handleClearErrorsCloseModal } = useDashboardData();
-
+  const searchParams = useSearchParams();
   const ModalErrorInfo = lazy(() => import("../components/error/ModalErrorInfo"));
+  const filterParam = searchParams.get("filter")?.toLocaleLowerCase() as FilterType | 'todos';
+  const hasFetched = useRef(false);
 
 
   useEffect(() => {
-    if (!resultSet) {
+    if (!hasFetched.current) {
+      hasFetched.current = true;
       handleGetDashboardData({ isAtualize: false, isDashboardPage: false });
     }
-  }, []);
 
+  }, []);
 
   return (
     <main>
@@ -25,10 +30,11 @@ export default function Campaigns() {
         requestLoading={false}
         title="Lista de Campanhas"
       />
-      <CampaignListContainer loading={requestLoading} handleGetDashboardData={handleGetDashboardData} campaigns={resultSet?.campaigns || []} />
-
+      <CampaignListContainer
+        filterParam={filterParam}
+        loading={requestLoading} handleGetDashboardData={handleGetDashboardData} campaigns={resultSet?.campaigns || []}
+      />
       <Suspense fallback={null}>
-
         {error && (
           <ModalErrorInfo
             open={true}

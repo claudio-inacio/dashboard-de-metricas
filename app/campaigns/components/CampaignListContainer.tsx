@@ -1,46 +1,54 @@
-import Button from "@/app/components/button/Button";
 import TableList from "@/app/components/generic-table/TableList";
 import LoadingComponent from "@/app/components/loader/LoadingComponent";
-import StatusComponent from "@/app/components/status/StatusComponent";
-import { CampaignData, ListCampaignData, TableColumn } from "@/app/types/dashboardData";
-
+import { CampaignData, FilterType } from "@/app/types/dashboardData";
+import { campaingColumns, statusEnumArray, statusEnum } from "@/app/enum";
+import { useMemo, useState } from "react";
+import CampaignListActions from "./CampaignListActions";
+import ModalErrorInfo from "@/app/components/error/ModalErrorInfo";
+import InvalidUrlAlertComponent from "@/app/components/error/InvalidUrlAlertComponent";
 
 
 
 interface CampaignListContainerProps {
   campaigns: CampaignData[];
   loading: boolean;
-  handleGetDashboardData: (props: { isAtualize: boolean, isDashboardPage: boolean }) => void;
+  filterParam: FilterType,
+  handleGetDashboardData: (props: { isAtualize: boolean, isDashboardPage: boolean, filterSelected?: FilterType, callBackFunction?: () => void }) => void;
 }
 
-const columns: TableColumn<ListCampaignData>[] = [
-  { header: "Nome", field: "name", type: "text" },
-  { header: "Canal", field: "channel", type: "text" },
-  {
-    header: "Status", field: "status", type: "custom", render: (item) => (
-      <StatusComponent status={item.status} />
-    )
-  },
-  { header: "Investimento", field: "investment", type: "currency" },
-  { header: "Início", field: "startDate", type: "date" },
-];
+export default function CampaignListContainer({ campaigns, loading, handleGetDashboardData, filterParam }: CampaignListContainerProps) {
+  const urlExist = statusEnumArray.includes(filterParam)
+  const invalidUrlParams = !urlExist && !!filterParam;
+  const [openModalErrorUrl, setModalErrorUrl] = useState(invalidUrlParams)
+  const [currentFilter, setCurrentFilter] = useState<FilterType>(filterParam || "todos")
 
-export default function CampaignListContainer({ campaigns, loading, handleGetDashboardData }: CampaignListContainerProps) {
+
+  const handleTradeFilterType = (newfilter: FilterType) => {
+    setCurrentFilter(newfilter)
+  }
+  const filteredCampaigns = useMemo(() => {
+    if (currentFilter === statusEnum.TODOS) return campaigns;
+    return campaigns.filter((c) => c.status === currentFilter);
+  }, [campaigns, currentFilter]);
+
   return (
     <div className="p-4 space-y-2">
-
-      <div className="flex justify-end items-center">
-
-        <Button disabled={loading} buttontitle="Atualizar"
-
-          handleFunction={() => handleGetDashboardData({ isAtualize: false, isDashboardPage: false })} color="warning" />
-      </div>
-
+      <CampaignListActions loading={loading} handleTradeFilterType={handleTradeFilterType} currentFilter={currentFilter} handleGetDashboardData={handleGetDashboardData} />
       {loading ? (
         <LoadingComponent title="Carregando dados" messageLoading="Aguarde enquanto buscamos suas campanhas" />
       ) : (
 
-        <TableList columns={columns} data={campaigns} />
+        <TableList columns={campaingColumns} data={filteredCampaigns} />
+      )}
+      {openModalErrorUrl && (
+        <ModalErrorInfo
+          open={openModalErrorUrl}
+          title="URL DE FILTRO INVALIDA"
+          message={
+            <InvalidUrlAlertComponent />
+          }
+          onClose={() => setModalErrorUrl(false)}
+        />
       )}
 
     </div>

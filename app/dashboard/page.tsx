@@ -1,6 +1,6 @@
 "use client";
 
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useRef } from "react";
 import useDashboardData from "../hooks/useDashboardData";
 import DashboardContainer from "./components/DashboardContainer";
 import PageHeaderActions from "../components/header/PageHeaderActions";
@@ -8,12 +8,12 @@ import PageHeaderActions from "../components/header/PageHeaderActions";
 
 export default function Dashboard() {
   const { resultSet, handleGetDashboardData, requestLoading, error, handleClearErrorsCloseModal } = useDashboardData();
-
+  const hasFetched = useRef(false);
   const ModalErrorInfo = lazy(() => import("../components/error/ModalErrorInfo"));
 
-
   useEffect(() => {
-    if (!resultSet) {
+    if (!hasFetched.current) {
+      hasFetched.current = true;
       handleGetDashboardData({ isAtualize: false });
     }
   }, []);

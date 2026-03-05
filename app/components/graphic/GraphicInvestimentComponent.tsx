@@ -1,4 +1,4 @@
-import useGraphiPreareData from "@/app/hooks/useGraphiPreareData";
+import useGraphiPrepareData from "@/app/hooks/useGraphiPrepareData";
 import { CampaignData } from "@/app/types/dashboardData";
 import { memo } from "react";
 import {
@@ -38,7 +38,7 @@ function GraphicInvestimentComponent({
   campaigns = [],
   error,
 }: CampaignInvestmentChartProps) {
-  const { groupCampaignsByChannel } = useGraphiPreareData();
+  const { groupCampaignsByChannel } = useGraphiPrepareData();
   const data = groupCampaignsByChannel(campaigns);
 
   if (error) {

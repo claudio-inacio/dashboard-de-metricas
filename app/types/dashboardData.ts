@@ -1,4 +1,5 @@
 export type CampaignStatus = "ativa" | "pausada" | "finalizada";
+export type FilterType = "todos" | "ativa" | "pausada" | "finalizada";
 
 export interface Metric {
     totalClients: number;

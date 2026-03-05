@@ -7,11 +7,13 @@ import { ToastContainer, toast } from 'react-toastify';
 interface GetDashboardDataProps {
     isAtualize: boolean;
     isDashboardPage?: boolean;
+    filterIsActive?: boolean
 }
 
 
 const useDashboardData = () => {
     const resultSetFromStorage = LocalStorageUtils.getItem("dashboardData", true) || null;
+
     const [resultSet, setResultSet] = useState<DashboardData | null>(resultSetFromStorage);
     const [requestLoading, setRequestLoading] = useState<boolean>(!resultSetFromStorage ? true : false);
     const [error, setError] = useState<string | false>(false);
@@ -31,13 +33,12 @@ const useDashboardData = () => {
                 throw new Error("Falha na requisição do dados de dashboard. Tente novamente mais tarde ou clieque em atualizar!");
             }
             const json: DashboardData = await response.json();
-            LocalStorageUtils.setItem("dashboardData", json);
-            if (isDashboardPage) {
-                toast.success(isAtualize ? "Dados do dashboard atualizados com sucesso!" : 'Dados do dashboard carregados com sucesso!');
-            } else {
-                toast.success(isAtualize ? "Lista de campanhas atualizada com sucesso!" : 'Lista de campanhas carregada com sucesso!');
-            }
+            // LocalStorageUtils.setItem("dashboardData", json);
+            const successAtualizeMessage = isDashboardPage ? 'Dados do dashboard atualizados com sucesso!' : "Lista de campanhas atualizada com sucesso!"
+            const successInitialRequestMessage = isDashboardPage ? "Dados do dashboard carregados com sucesso!" : "Lista de campanhas carregada com sucesso!"
+            toast.success(isAtualize ? successAtualizeMessage : successInitialRequestMessage);
             setResultSet(json);
+            return json.campaigns
         }
         catch (error) {
             setError(error instanceof Error ? error.message : "Falha na requisição do dados de dashboard. Tente novamente mais tarde")

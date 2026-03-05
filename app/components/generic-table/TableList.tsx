@@ -22,25 +22,18 @@ export default function TableList<T extends Record<string, any>>({
 
   return (
     <div className="w-full bg-white rounded-xl shadow">
+      <div className="max-h-[600px]  overflow-y-auto rounded-xl">
+        {!data || data?.length === 0 ? (
+          <div className="w-full  flex justify-center items-center m-auto">
+            <DontResultSetDataComponent
+              title="Nenhuma Campanha Econtrada"
+            />
+          </div>
 
-      <div className="max-h-[500px]  overflow-y-auto rounded-xl">
-
-          {!data || data?.length === 0 ? (
-            <div className="w-full  flex justify-center items-center m-auto">
-
-              <DontResultSetDataComponent
-                title="Nenhuma Campanha Econtrada"
-
-              />
-            </div>
-
-          ) : (
-        <table className="w-full  border-collapse">
-
-          <TableHeader columns={columns} />
-
+        ) : (
+          <table className="w-full  border-collapse">
+            <TableHeader columns={columns} />
             <tbody>
-
               {data.map((item, index) => (
                 <TableRow
                   key={index}
@@ -50,10 +43,8 @@ export default function TableList<T extends Record<string, any>>({
                 />
               ))}
             </tbody>
-        </table>
-          )}
-
-
+          </table>
+        )}
       </div>
 
     </div>

@@ -8,7 +8,7 @@ export type ChannelGroupedData = {
     campaign_count: number;
 };
 
-const useGraphiPreareData = () => {
+const useGraphiPrepareData = () => {
     function groupCampaignsByChannel(campaigns: CampaignData[]) {
 
         const grouped: Record<string, ChannelGroupedData> = {};
@@ -42,4 +42,4 @@ const useGraphiPreareData = () => {
     return { groupCampaignsByChannel }
 }
 
-export default useGraphiPreareData;
+export default useGraphiPrepareData;

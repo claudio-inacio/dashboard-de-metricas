@@ -1,4 +1,5 @@
 "use client";
+import { ReactNode } from "react";
 import Button from "../button/Button";
 
 
@@ -6,7 +7,7 @@ import Button from "../button/Button";
 interface ErrorModalProps {
     open: boolean;
     title?: string;
-    message: string;
+    message: string | ReactNode;
     onClose: () => void;
 }
 
