@@ -25,32 +25,32 @@ export default function Campaigns() {
   }, []);
 
   return (
-    <main>
-      <PageHeaderActions
-        requestLoading={false}
-        title="Lista de Campanhas"
-      />
-      <Suspense fallback={null}>
+    <Suspense fallback={null}>
+      <main>
+        <PageHeaderActions
+          requestLoading={false}
+          title="Lista de Campanhas"
+        />
 
         <CampaignListContainer
           filterParam={filterParam}
           loading={requestLoading} handleGetDashboardData={handleGetDashboardData} campaigns={resultSet?.campaigns || []}
         />
-      </Suspense>
-      <Suspense fallback={null}>
-        {error && (
-          <ModalErrorInfo
-            open={true}
-            title="Falha na requisição"
-            message={
-              typeof error === "string"
-                ? error
-                : "Ocorreu um erro desconhecido. Tente novamente mais tarde."
-            }
-            onClose={handleClearErrorsCloseModal}
-          />
-        )}
-      </Suspense>
-    </main>
+        <Suspense fallback={null}>
+          {error && (
+            <ModalErrorInfo
+              open={true}
+              title="Falha na requisição"
+              message={
+                typeof error === "string"
+                  ? error
+                  : "Ocorreu um erro desconhecido. Tente novamente mais tarde."
+              }
+              onClose={handleClearErrorsCloseModal}
+            />
+          )}
+        </Suspense>
+      </main>
+    </Suspense>
   );
 }
