@@ -42,7 +42,6 @@ Recharts (gráficos)
 
 React Toastify (notificações)
 
-LocalStorage (cache simples de dados)
 
 🌐 Ambiente de Produção
 
@@ -167,28 +166,15 @@ Fast 4G
 
 ou
 
-4️⃣ Limpe o LocalStorage e recarregue a página.
+4️⃣recarregue a página.
 
 💾 Cache de Dados
-
-Para evitar múltiplas requisições ao navegar entre páginas, os dados são armazenados temporariamente no LocalStorage.
-
-Isso simula um comportamento de cache.
 
 Melhoria futura:
 
 Utilizar React Query para cache de requisições.
 Desabilitar o armazenamento
 
-Caso queira desativar o cache no LocalStorage:
-
-Remova ou comente a linha:
-
-LocalStorageUtils.setItem("dashboardData", json);
-
-Localizada no hook:
-
-useDashboardData
 Atualizar dados manualmente
 
 Caso o cache esteja ativo, o botão Atualizar executa uma nova requisição.
